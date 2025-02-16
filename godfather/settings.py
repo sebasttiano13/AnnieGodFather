@@ -13,6 +13,7 @@ class AppConfig(BaseModel):
     LOG_LEVEL: str = "INFO"
     TELEGRAM_TOKEN: str
     LOG_FILE: str = None
+    SAVE_FOLDER: str = None
 
     @field_validator("LOG_LEVEL")
     def check_log_level(cls, value):

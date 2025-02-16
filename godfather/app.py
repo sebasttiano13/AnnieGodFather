@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import asyncio
+import os
 
-from aiogram import Bot, Dispatcher, html
+from aiogram import Bot, Dispatcher, html, types, F
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 from aiogram.client.default import DefaultBotProperties
@@ -13,6 +14,7 @@ from settings import config
 
 
 dp = Dispatcher()
+bot = Bot(token=config.TELEGRAM_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
 
 @dp.message(CommandStart())
@@ -27,6 +29,40 @@ async def command_start_handler(message: Message) -> None:
     # Bot instance: `bot.send_message(chat_id=message.chat.id, ...)`
     await message.answer(f"Hello, {html.bold(message.from_user.full_name)}!")
 
+
+@dp.message(F.photo | F.video | F.audio | F.document)
+async def save_media(message: types.Message):
+    if message.photo:
+        # Если это фото, берем последний элемент (самое высокое качество)
+        file_id = message.photo[-1].file_id
+        file_name = f"photo_{file_id}.jpg"
+        logger.info("Catch photo %s" % file_name)
+    elif message.document:
+        # Если это документ, берем file_id и оригинальное имя файла
+        file_id = message.document.file_id
+        file_name = message.document.file_name
+        logger.info("Catch document %s" % file_name)
+    elif message.video:
+        file_id = message.video.file_id
+        file_name = f"video_{file_id}.mp4"
+        logger.info("Catch video %s" % file_name)
+    elif message.audio:
+        file_id = message.audio.file_id
+        file_name = f"audio_{file_id}.mp3"
+        logger.info("Catch audio %s" % file_name)
+    else:
+        await message.reply("Этот тип медиа не поддерживается.")
+        return
+
+    # Получаем информацию о файле
+    file = await bot.get_file(file_id)
+    file_path = file.file_path
+
+
+    # Скачиваем файл
+    await bot.download_file(file_path, os.path.join(config.SAVE_FOLDER, file_name))
+    logger.info("File saved %s" % file_name)
+    await message.reply(f"Файл сохранен: {file_name}")
 
 @dp.message()
 async def echo_handler(message: Message) -> None:
@@ -45,7 +81,6 @@ async def echo_handler(message: Message) -> None:
 
 async def main() -> None:
     # Initialize Bot instance with default bot properties which will be passed to all API calls
-    bot = Bot(token=config.TELEGRAM_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
     # And the run events dispatching
     await dp.start_polling(bot)
