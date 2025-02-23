@@ -14,6 +14,8 @@ class AppConfig(BaseModel):
     TELEGRAM_TOKEN: str
     LOG_FILE: str = None
     SAVE_FOLDER: str = None
+    API_ID: int = None
+    API_HASH: str = None
 
     @field_validator("LOG_LEVEL")
     def check_log_level(cls, value):

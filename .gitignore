@@ -30,3 +30,7 @@ venv.bak/
 
 .DS_Store
 examples/
+
+
+# Telegram sessions
+sessions/
