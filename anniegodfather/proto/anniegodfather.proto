@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+package main;
+
+option go_package = "github.com/sebasttiano13/AnnieDad/internal/proto";
+
+message RegisterRequest {
+  string name = 1;
+  string password = 2;
+}
+
+message LoginRequest {
+  string name = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string token = 1;
+}
+
+service Auth {
+  rpc Register(RegisterRequest) returns (google.protobuf.Empty);
+  rpc Login(LoginRequest) returns (LoginResponse);
+}
+
+message PostMediaRequest {
+}
+
+message PostMediaResponse {
+  string url = 1;
+}
+
+service PresignedURL {
+  rpc PostURL(PostMediaRequest) returns (PostMediaResponse);
+}
+

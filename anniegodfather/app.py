@@ -4,15 +4,16 @@ import asyncio
 import os
 
 from aiogram import Bot, Dispatcher, html, types, F
-from aiogram.filters import CommandStart
+from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
+from pydantic.v1.validators import anystr_strip_whitespace
 from telethon import TelegramClient
 
 from logger import logger
 from settings import config
-
+from clients import DadClient
 
 dp = Dispatcher()
 bot = Bot(token=config.TELEGRAM_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
@@ -89,6 +90,12 @@ async def save_media(message: types.Message):
     await message.reply(f"Файл сохранен: {file_name}")
 
 
+@dp.message(Command("url"))
+async def test_get_url(message: Message) -> str:
+    dad_client = DadClient("127.0.0.1:8081")
+    url = await dad_client.fetch_post_url()
+    await message.answer(url.url)
+
 @dp.message()
 async def echo_handler(message: Message) -> None:
     """
@@ -102,7 +109,6 @@ async def echo_handler(message: Message) -> None:
     except TypeError:
         # But not all the types is supported to be copied so need to handle it
         await message.answer("Nice try!")
-
 
 async def main() -> None:
     # Initialize Bot instance with default bot properties which will be passed to all API calls

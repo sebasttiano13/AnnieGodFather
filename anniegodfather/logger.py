@@ -48,9 +48,9 @@ logger_config = {
         },
     },
     "loggers": {
-        "godfather-logger": {"level": config.LOG_LEVEL, "handlers": ["console"]},
+        "anniegodfather-logger": {"level": config.LOG_LEVEL, "handlers": ["console"]},
     },
 }
 
 logging.config.dictConfig(logger_config)
-logger = logging.getLogger("godfather-logger")
+logger = logging.getLogger("anniegodfather-logger")
