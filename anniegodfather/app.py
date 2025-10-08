@@ -4,6 +4,7 @@ import asyncio
 import os
 
 from aiogram import Bot, Dispatcher, html, types, F
+from aiogram.client.session import aiohttp
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from aiogram.client.default import DefaultBotProperties
@@ -85,15 +86,31 @@ async def save_media(message: types.Message):
 
 
     # Скачиваем файл
-    await bot.download_file(file_path, os.path.join(config.SAVE_FOLDER, file_name))
-    logger.info("File saved %s" % file_name)
-    await message.reply(f"Файл сохранен: {file_name}")
+    file_location = os.path.join(config.SAVE_FOLDER, file_name)
+    await bot.download_file(file_path, file_location)
 
-
-@dp.message(Command("url"))
-async def test_get_url(message: Message) -> str:
+    # Получаем подписанную ссылку
     dad_client = DadClient("127.0.0.1:8081")
     url = await dad_client.fetch_post_url()
+    logger.info("GET URL: %s", url)
+    # --- загружаем на S3 через presigned URL ---
+    async with aiohttp.ClientSession() as session:
+        with open(file_location, "rb") as f:
+            async with session.put(url.url, data=f) as resp:
+                if resp.status == 200:
+                    logger.info("File saved to S3 %s" % file_name)
+                    await message.reply(f"✅ Файл загружен в S3: {file_name}")
+                else:
+                    text = await resp.text()
+                    await message.reply(f"⚠️ Ошибка при загрузке ({resp.status}): {text}")
+
+    os.remove(file_location)
+
+@dp.message(F.text.startswith('show'))
+async def test_fetch_get_url(message: Message) -> str:
+    _, filename = message.text.split(maxsplit=1)
+    dad_client = DadClient("127.0.0.1:8081")
+    url = await dad_client.fetch_get_url(filename=filename)
     await message.answer(url.url)
 
 @dp.message()

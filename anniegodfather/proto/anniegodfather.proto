@@ -31,7 +31,21 @@ message PostMediaResponse {
   string url = 1;
 }
 
-service PresignedURL {
+message GetMediaRequest {
+  string filename = 1;
+}
+
+message GetMediaResponse {
+  string url = 1;
+}
+
+message GetListURLResponse {
+  repeated string url = 1;
+}
+
+service Media {
   rpc PostURL(PostMediaRequest) returns (PostMediaResponse);
+  rpc GetURL(GetMediaRequest) returns (GetMediaResponse);
+  rpc GetListURL(google.protobuf.Empty) returns (GetMediaResponse);
 }
 

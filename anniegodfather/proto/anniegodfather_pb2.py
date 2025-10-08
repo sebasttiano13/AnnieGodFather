@@ -25,7 +25,7 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)anniegodfather/proto/anniegodfather.proto\x12\x04main\x1a\x1bgoogle/protobuf/empty.proto\"1\n\x0fRegisterRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\".\n\x0cLoginRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"\x1e\n\rLoginResponse\x12\r\n\x05token\x18\x01 \x01(\t\"\x12\n\x10PostMediaRequest\" \n\x11PostMediaResponse\x12\x0b\n\x03url\x18\x01 \x01(\t2s\n\x04\x41uth\x12\x39\n\x08Register\x12\x15.main.RegisterRequest\x1a\x16.google.protobuf.Empty\x12\x30\n\x05Login\x12\x12.main.LoginRequest\x1a\x13.main.LoginResponse2J\n\x0cPresignedURL\x12:\n\x07PostURL\x12\x16.main.PostMediaRequest\x1a\x17.main.PostMediaResponseB2Z0github.com/sebasttiano13/AnnieDad/internal/protob\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)anniegodfather/proto/anniegodfather.proto\x12\x04main\x1a\x1bgoogle/protobuf/empty.proto\"1\n\x0fRegisterRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\".\n\x0cLoginRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"\x1e\n\rLoginResponse\x12\r\n\x05token\x18\x01 \x01(\t\"\x12\n\x10PostMediaRequest\" \n\x11PostMediaResponse\x12\x0b\n\x03url\x18\x01 \x01(\t\"#\n\x0fGetMediaRequest\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\"\x1f\n\x10GetMediaResponse\x12\x0b\n\x03url\x18\x01 \x01(\t\"!\n\x12GetListURLResponse\x12\x0b\n\x03url\x18\x01 \x03(\t2s\n\x04\x41uth\x12\x39\n\x08Register\x12\x15.main.RegisterRequest\x1a\x16.google.protobuf.Empty\x12\x30\n\x05Login\x12\x12.main.LoginRequest\x1a\x13.main.LoginResponse2\xba\x01\n\x05Media\x12:\n\x07PostURL\x12\x16.main.PostMediaRequest\x1a\x17.main.PostMediaResponse\x12\x37\n\x06GetURL\x12\x15.main.GetMediaRequest\x1a\x16.main.GetMediaResponse\x12<\n\nGetListURL\x12\x16.google.protobuf.Empty\x1a\x16.main.GetMediaResponseB2Z0github.com/sebasttiano13/AnnieDad/internal/protob\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -43,8 +43,14 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_POSTMEDIAREQUEST']._serialized_end=229
   _globals['_POSTMEDIARESPONSE']._serialized_start=231
   _globals['_POSTMEDIARESPONSE']._serialized_end=263
-  _globals['_AUTH']._serialized_start=265
-  _globals['_AUTH']._serialized_end=380
-  _globals['_PRESIGNEDURL']._serialized_start=382
-  _globals['_PRESIGNEDURL']._serialized_end=456
+  _globals['_GETMEDIAREQUEST']._serialized_start=265
+  _globals['_GETMEDIAREQUEST']._serialized_end=300
+  _globals['_GETMEDIARESPONSE']._serialized_start=302
+  _globals['_GETMEDIARESPONSE']._serialized_end=333
+  _globals['_GETLISTURLRESPONSE']._serialized_start=335
+  _globals['_GETLISTURLRESPONSE']._serialized_end=368
+  _globals['_AUTH']._serialized_start=370
+  _globals['_AUTH']._serialized_end=485
+  _globals['_MEDIA']._serialized_start=488
+  _globals['_MEDIA']._serialized_end=674
 # @@protoc_insertion_point(module_scope)

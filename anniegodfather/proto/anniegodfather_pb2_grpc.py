@@ -141,7 +141,7 @@ class Auth(object):
             _registered_method=True)
 
 
-class PresignedURLStub(object):
+class MediaStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -151,13 +151,23 @@ class PresignedURLStub(object):
             channel: A grpc.Channel.
         """
         self.PostURL = channel.unary_unary(
-                '/main.PresignedURL/PostURL',
+                '/main.Media/PostURL',
                 request_serializer=anniegodfather_dot_proto_dot_anniegodfather__pb2.PostMediaRequest.SerializeToString,
                 response_deserializer=anniegodfather_dot_proto_dot_anniegodfather__pb2.PostMediaResponse.FromString,
                 _registered_method=True)
+        self.GetURL = channel.unary_unary(
+                '/main.Media/GetURL',
+                request_serializer=anniegodfather_dot_proto_dot_anniegodfather__pb2.GetMediaRequest.SerializeToString,
+                response_deserializer=anniegodfather_dot_proto_dot_anniegodfather__pb2.GetMediaResponse.FromString,
+                _registered_method=True)
+        self.GetListURL = channel.unary_unary(
+                '/main.Media/GetListURL',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=anniegodfather_dot_proto_dot_anniegodfather__pb2.GetMediaResponse.FromString,
+                _registered_method=True)
 
 
-class PresignedURLServicer(object):
+class MediaServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def PostURL(self, request, context):
@@ -166,23 +176,45 @@ class PresignedURLServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetURL(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
-def add_PresignedURLServicer_to_server(servicer, server):
+    def GetListURL(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_MediaServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'PostURL': grpc.unary_unary_rpc_method_handler(
                     servicer.PostURL,
                     request_deserializer=anniegodfather_dot_proto_dot_anniegodfather__pb2.PostMediaRequest.FromString,
                     response_serializer=anniegodfather_dot_proto_dot_anniegodfather__pb2.PostMediaResponse.SerializeToString,
             ),
+            'GetURL': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetURL,
+                    request_deserializer=anniegodfather_dot_proto_dot_anniegodfather__pb2.GetMediaRequest.FromString,
+                    response_serializer=anniegodfather_dot_proto_dot_anniegodfather__pb2.GetMediaResponse.SerializeToString,
+            ),
+            'GetListURL': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetListURL,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=anniegodfather_dot_proto_dot_anniegodfather__pb2.GetMediaResponse.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'main.PresignedURL', rpc_method_handlers)
+            'main.Media', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('main.PresignedURL', rpc_method_handlers)
+    server.add_registered_method_handlers('main.Media', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class PresignedURL(object):
+class Media(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
@@ -199,9 +231,63 @@ class PresignedURL(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/main.PresignedURL/PostURL',
+            '/main.Media/PostURL',
             anniegodfather_dot_proto_dot_anniegodfather__pb2.PostMediaRequest.SerializeToString,
             anniegodfather_dot_proto_dot_anniegodfather__pb2.PostMediaResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetURL(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/main.Media/GetURL',
+            anniegodfather_dot_proto_dot_anniegodfather__pb2.GetMediaRequest.SerializeToString,
+            anniegodfather_dot_proto_dot_anniegodfather__pb2.GetMediaResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetListURL(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/main.Media/GetListURL',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            anniegodfather_dot_proto_dot_anniegodfather__pb2.GetMediaResponse.FromString,
             options,
             channel_credentials,
             insecure,
