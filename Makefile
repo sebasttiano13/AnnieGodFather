@@ -38,7 +38,8 @@ lint: clean ## Lint
 	pre-commit run -a
 
 proto: ## Generate proto files
-	python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. anniegodfather/proto/anniegodfather.proto
+	python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. anniegodfather/proto/anniedad.proto
+	python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. anniegodfather/proto/auth.proto
 
 # DOCKER
 

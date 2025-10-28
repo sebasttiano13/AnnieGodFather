@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+package main;
+
+option go_package = "github.com/sebasttiano13/AnnieDad/internal/proto/auth";
+
+message BotLoginRequest {
+  int64 telegram_id = 1;
+}
+
+message RefreshRequest {
+  string refresh_token = 1;
+}
+
+message AuthResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  int64 expires_in = 3;
+}
+
+message LinkWebRequest {
+  string bind_token = 1;
+  int64 telegram_id = 2;
+}
+
+
+service AuthService {
+  rpc LoginBot (BotLoginRequest) returns (AuthResponse);
+  rpc RefreshToken (RefreshRequest) returns (AuthResponse);
+  rpc LinkWeb (LinkWebRequest) returns (google.protobuf.Empty);
+}
+

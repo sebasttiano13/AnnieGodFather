@@ -16,6 +16,7 @@ class AppConfig(BaseModel):
     SAVE_FOLDER: str = None
     API_ID: int = None
     API_HASH: str = None
+    DAD_API_KEY: str = None
 
     @field_validator("LOG_LEVEL")
     def check_log_level(cls, value):
