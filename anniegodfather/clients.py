@@ -29,7 +29,7 @@ class DadClient:
             req = auth_pb2.BotLoginRequest(
                 telegram_id=telegram_id,
             )
-            resp = await self.auth_stub.LoginBot(req)
+            resp = await self.auth_stub.LoginBot(req, metadata=[("x-api-key", self.bot_api_key)])
             self.user_tokens[telegram_id] = {
                 "access_token": resp.access_token,
                 "refresh_token": resp.refresh_token,
@@ -42,25 +42,29 @@ class DadClient:
 
         if telegram_id:
             access_token = await self.ensure_user_token(telegram_id)
-            metadata.append(("authorization", f"Bearer {access_token}"))
+            metadata.append(("authorization", f"{access_token}"))
 
         return await stub_method(request, metadata=metadata)
 
     # ====== Пример методов ======
 
     async def fetch_post_url(self, filename: str, telegram_id=None):
-        req = father_pb2.PostMediaRequest(filename=filename)
+        request = father_pb2.PostMediaRequest(filename=filename)
         resp = await self.call_with_auth(
             self.media_stub.PostURL,
-            req,
+            request,
             telegram_id=telegram_id,
         )
         return resp.url
 
-    async def fetch_get_url(self, filename: str) -> Any:
+    async def fetch_get_url(self, filename: str, telegram_id=None) -> Any:
         """Gets presighned S3 get url from anniedad backend"""
 
         request = father_pb2.GetMediaRequest(filename=filename)
-        get_url = await self.media_stub.GetURL(request)
+        resp = await self.call_with_auth(
+            self.media_stub.GetURL,
+            request,
+            telegram_id=telegram_id,
+        )
 
-        return get_url
+        return resp

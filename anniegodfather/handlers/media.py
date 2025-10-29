@@ -63,12 +63,13 @@ async def save_media(message: types.Message, dad: DadClient, telethon: TelegramC
     await bot.download_file(file_path, file_location)
 
     # Получаем подписанную ссылку
-    url = await dad.fetch_post_url(file_name)
+    telegram_id = message.from_user.id
+    url = await dad.fetch_post_url(file_name, telegram_id=telegram_id)
     logger.info("GET URL: %s", url)
     # --- загружаем на S3 через presigned URL ---
     async with aiohttp.ClientSession() as session:
         with open(file_location, "rb") as f:
-            async with session.put(url.url, data=f) as resp:
+            async with session.put(url, data=f) as resp:
                 if resp.status == 200:
                     logger.info("File saved to S3 %s" % file_name)
                     await message.reply(f"✅ Файл загружен в S3: {file_name}")
@@ -81,5 +82,6 @@ async def save_media(message: types.Message, dad: DadClient, telethon: TelegramC
 @media_router.message(F.text.startswith('show'))
 async def test_fetch_get_url(message: Message, dad: DadClient) -> str:
     _, filename = message.text.split(maxsplit=1)
-    url = await dad.fetch_get_url(filename=filename)
+    telegram_id = message.from_user.id
+    url = await dad.fetch_get_url(filename=filename, telegram_id=telegram_id)
     await message.answer(url.url)
