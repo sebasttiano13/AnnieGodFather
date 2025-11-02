@@ -6,7 +6,7 @@ import warnings
 from anniegodfather.proto import auth_pb2 as anniegodfather_dot_proto_dot_auth__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
-GRPC_GENERATED_VERSION = '1.75.1'
+GRPC_GENERATED_VERSION = '1.76.0'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -19,7 +19,7 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in anniegodfather/proto/auth_pb2_grpc.py depends on'
+        + ' but the generated code in anniegodfather/proto/auth_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
@@ -35,9 +35,14 @@ class AuthServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.LoginBot = channel.unary_unary(
-                '/main.AuthService/LoginBot',
-                request_serializer=anniegodfather_dot_proto_dot_auth__pb2.BotLoginRequest.SerializeToString,
+        self.RegisterTelegram = channel.unary_unary(
+                '/main.AuthService/RegisterTelegram',
+                request_serializer=anniegodfather_dot_proto_dot_auth__pb2.TelegramRegisterRequest.SerializeToString,
+                response_deserializer=anniegodfather_dot_proto_dot_auth__pb2.AuthResponse.FromString,
+                _registered_method=True)
+        self.LoginTelegram = channel.unary_unary(
+                '/main.AuthService/LoginTelegram',
+                request_serializer=anniegodfather_dot_proto_dot_auth__pb2.TelegramLoginRequest.SerializeToString,
                 response_deserializer=anniegodfather_dot_proto_dot_auth__pb2.AuthResponse.FromString,
                 _registered_method=True)
         self.RefreshToken = channel.unary_unary(
@@ -55,7 +60,13 @@ class AuthServiceStub(object):
 class AuthServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def LoginBot(self, request, context):
+    def RegisterTelegram(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LoginTelegram(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -76,9 +87,14 @@ class AuthServiceServicer(object):
 
 def add_AuthServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'LoginBot': grpc.unary_unary_rpc_method_handler(
-                    servicer.LoginBot,
-                    request_deserializer=anniegodfather_dot_proto_dot_auth__pb2.BotLoginRequest.FromString,
+            'RegisterTelegram': grpc.unary_unary_rpc_method_handler(
+                    servicer.RegisterTelegram,
+                    request_deserializer=anniegodfather_dot_proto_dot_auth__pb2.TelegramRegisterRequest.FromString,
+                    response_serializer=anniegodfather_dot_proto_dot_auth__pb2.AuthResponse.SerializeToString,
+            ),
+            'LoginTelegram': grpc.unary_unary_rpc_method_handler(
+                    servicer.LoginTelegram,
+                    request_deserializer=anniegodfather_dot_proto_dot_auth__pb2.TelegramLoginRequest.FromString,
                     response_serializer=anniegodfather_dot_proto_dot_auth__pb2.AuthResponse.SerializeToString,
             ),
             'RefreshToken': grpc.unary_unary_rpc_method_handler(
@@ -103,7 +119,7 @@ class AuthService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def LoginBot(request,
+    def RegisterTelegram(request,
             target,
             options=(),
             channel_credentials=None,
@@ -116,8 +132,35 @@ class AuthService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/main.AuthService/LoginBot',
-            anniegodfather_dot_proto_dot_auth__pb2.BotLoginRequest.SerializeToString,
+            '/main.AuthService/RegisterTelegram',
+            anniegodfather_dot_proto_dot_auth__pb2.TelegramRegisterRequest.SerializeToString,
+            anniegodfather_dot_proto_dot_auth__pb2.AuthResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LoginTelegram(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/main.AuthService/LoginTelegram',
+            anniegodfather_dot_proto_dot_auth__pb2.TelegramLoginRequest.SerializeToString,
             anniegodfather_dot_proto_dot_auth__pb2.AuthResponse.FromString,
             options,
             channel_credentials,

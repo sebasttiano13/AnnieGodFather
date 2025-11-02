@@ -25,7 +25,7 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1f\x61nniegodfather/proto/auth.proto\x12\x04main\x1a\x1bgoogle/protobuf/empty.proto\"&\n\x0f\x42otLoginRequest\x12\x13\n\x0btelegram_id\x18\x01 \x01(\x03\"\'\n\x0eRefreshRequest\x12\x15\n\rrefresh_token\x18\x01 \x01(\t\"O\n\x0c\x41uthResponse\x12\x14\n\x0c\x61\x63\x63\x65ss_token\x18\x01 \x01(\t\x12\x15\n\rrefresh_token\x18\x02 \x01(\t\x12\x12\n\nexpires_in\x18\x03 \x01(\x03\"9\n\x0eLinkWebRequest\x12\x12\n\nbind_token\x18\x01 \x01(\t\x12\x13\n\x0btelegram_id\x18\x02 \x01(\x03\x32\xb7\x01\n\x0b\x41uthService\x12\x35\n\x08LoginBot\x12\x15.main.BotLoginRequest\x1a\x12.main.AuthResponse\x12\x38\n\x0cRefreshToken\x12\x14.main.RefreshRequest\x1a\x12.main.AuthResponse\x12\x37\n\x07LinkWeb\x12\x14.main.LinkWebRequest\x1a\x16.google.protobuf.EmptyB7Z5github.com/sebasttiano13/AnnieDad/internal/proto/authb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1f\x61nniegodfather/proto/auth.proto\x12\x04main\x1a\x1bgoogle/protobuf/empty.proto\"@\n\x17TelegramRegisterRequest\x12\x13\n\x0btelegram_id\x18\x01 \x01(\x03\x12\x10\n\x08username\x18\x02 \x01(\t\"+\n\x14TelegramLoginRequest\x12\x13\n\x0btelegram_id\x18\x01 \x01(\x03\"\'\n\x0eRefreshRequest\x12\x15\n\rrefresh_token\x18\x01 \x01(\t\";\n\x0c\x41uthResponse\x12\x14\n\x0c\x61\x63\x63\x65ss_token\x18\x01 \x01(\t\x12\x15\n\rrefresh_token\x18\x02 \x01(\t\"9\n\x0eLinkWebRequest\x12\x12\n\nbind_token\x18\x01 \x01(\t\x12\x13\n\x0btelegram_id\x18\x02 \x01(\x03\x32\x88\x02\n\x0b\x41uthService\x12\x45\n\x10RegisterTelegram\x12\x1d.main.TelegramRegisterRequest\x1a\x12.main.AuthResponse\x12?\n\rLoginTelegram\x12\x1a.main.TelegramLoginRequest\x1a\x12.main.AuthResponse\x12\x38\n\x0cRefreshToken\x12\x14.main.RefreshRequest\x1a\x12.main.AuthResponse\x12\x37\n\x07LinkWeb\x12\x14.main.LinkWebRequest\x1a\x16.google.protobuf.EmptyB7Z5github.com/sebasttiano13/AnnieDad/internal/proto/authb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -33,14 +33,16 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'anniegodfather.proto.auth_p
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z5github.com/sebasttiano13/AnnieDad/internal/proto/auth'
-  _globals['_BOTLOGINREQUEST']._serialized_start=70
-  _globals['_BOTLOGINREQUEST']._serialized_end=108
-  _globals['_REFRESHREQUEST']._serialized_start=110
-  _globals['_REFRESHREQUEST']._serialized_end=149
-  _globals['_AUTHRESPONSE']._serialized_start=151
-  _globals['_AUTHRESPONSE']._serialized_end=230
-  _globals['_LINKWEBREQUEST']._serialized_start=232
-  _globals['_LINKWEBREQUEST']._serialized_end=289
-  _globals['_AUTHSERVICE']._serialized_start=292
-  _globals['_AUTHSERVICE']._serialized_end=475
+  _globals['_TELEGRAMREGISTERREQUEST']._serialized_start=70
+  _globals['_TELEGRAMREGISTERREQUEST']._serialized_end=134
+  _globals['_TELEGRAMLOGINREQUEST']._serialized_start=136
+  _globals['_TELEGRAMLOGINREQUEST']._serialized_end=179
+  _globals['_REFRESHREQUEST']._serialized_start=181
+  _globals['_REFRESHREQUEST']._serialized_end=220
+  _globals['_AUTHRESPONSE']._serialized_start=222
+  _globals['_AUTHRESPONSE']._serialized_end=281
+  _globals['_LINKWEBREQUEST']._serialized_start=283
+  _globals['_LINKWEBREQUEST']._serialized_end=340
+  _globals['_AUTHSERVICE']._serialized_start=343
+  _globals['_AUTHSERVICE']._serialized_end=607
 # @@protoc_insertion_point(module_scope)

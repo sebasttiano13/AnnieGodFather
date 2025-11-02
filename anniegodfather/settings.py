@@ -17,6 +17,7 @@ class AppConfig(BaseModel):
     API_ID: int = None
     API_HASH: str = None
     DAD_API_KEY: str = None
+    REDIS_URL: str = None
 
     @field_validator("LOG_LEVEL")
     def check_log_level(cls, value):

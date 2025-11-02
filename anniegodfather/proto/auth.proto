@@ -5,7 +5,12 @@ package main;
 
 option go_package = "github.com/sebasttiano13/AnnieDad/internal/proto/auth";
 
-message BotLoginRequest {
+message TelegramRegisterRequest {
+  int64 telegram_id = 1;
+  string username = 2;
+}
+
+message TelegramLoginRequest {
   int64 telegram_id = 1;
 }
 
@@ -16,7 +21,6 @@ message RefreshRequest {
 message AuthResponse {
   string access_token = 1;
   string refresh_token = 2;
-  int64 expires_in = 3;
 }
 
 message LinkWebRequest {
@@ -26,7 +30,8 @@ message LinkWebRequest {
 
 
 service AuthService {
-  rpc LoginBot (BotLoginRequest) returns (AuthResponse);
+  rpc RegisterTelegram (TelegramRegisterRequest) returns (AuthResponse);
+  rpc LoginTelegram (TelegramLoginRequest) returns (AuthResponse);
   rpc RefreshToken (RefreshRequest) returns (AuthResponse);
   rpc LinkWeb (LinkWebRequest) returns (google.protobuf.Empty);
 }
