@@ -22,10 +22,10 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
-from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
+from google.protobuf import struct_pb2 as google_dot_protobuf_dot_struct__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n#anniegodfather/proto/anniedad.proto\x12\x04main\x1a\x1bgoogle/protobuf/empty.proto\"$\n\x10PostMediaRequest\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\" \n\x11PostMediaResponse\x12\x0b\n\x03url\x18\x01 \x01(\t\"#\n\x0fGetMediaRequest\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\"\x1f\n\x10GetMediaResponse\x12\x0b\n\x03url\x18\x01 \x01(\t\"!\n\x12GetListURLResponse\x12\x0b\n\x03url\x18\x01 \x03(\t2\xba\x01\n\x05Media\x12:\n\x07PostURL\x12\x16.main.PostMediaRequest\x1a\x17.main.PostMediaResponse\x12\x37\n\x06GetURL\x12\x15.main.GetMediaRequest\x1a\x16.main.GetMediaResponse\x12<\n\nGetListURL\x12\x16.google.protobuf.Empty\x1a\x16.main.GetMediaResponseB;Z9github.com/sebasttiano13/AnnieDad/internal/proto/anniedadb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n#anniegodfather/proto/anniedad.proto\x12\x04main\x1a\x1cgoogle/protobuf/struct.proto\"?\n\x10PostMediaRequest\x12+\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x1d.main.PostMediaRequestMessage\"y\n\x17PostMediaRequestMessage\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x11\n\tmime_type\x18\x02 \x01(\t\x12\x12\n\nsize_bytes\x18\x03 \x01(\x03\x12%\n\x04meta\x18\x04 \x01(\x0b\x32\x17.google.protobuf.Struct\"A\n\x11PostMediaResponse\x12,\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x1e.main.PostMediaResponseMessage\"\xa1\x01\n\x18PostMediaResponseMessage\x12\x0f\n\x07\x66ile_id\x18\x01 \x01(\t\x12\x10\n\x08\x66ilename\x18\x02 \x01(\t\x12\x12\n\nupload_url\x18\x03 \x01(\t\x12\x14\n\x0cstorage_path\x18\x04 \x01(\t\x12!\n\x06status\x18\x05 \x01(\x0e\x32\x11.main.MediaStatus\x12\x15\n\rerror_message\x18\x06 \x01(\t\"=\n\x0fGetMediaRequest\x12*\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x1c.main.GetMediaRequestMessage\")\n\x16GetMediaRequestMessage\x12\x0f\n\x07\x66ile_id\x18\x01 \x01(\t\"?\n\x10GetMediaResponse\x12+\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x1d.main.GetMediaResponseMessage\"\xcc\x01\n\x17GetMediaResponseMessage\x12\x14\n\x0c\x64ownload_url\x18\x01 \x01(\t\x12\x0f\n\x07\x66ile_id\x18\x02 \x01(\t\x12\x10\n\x08\x66ilename\x18\x03 \x01(\t\x12\x11\n\tmime_type\x18\x04 \x01(\t\x12\x12\n\nsize_bytes\x18\x05 \x01(\x03\x12\x13\n\x0buploaded_at\x18\x06 \x01(\t\x12%\n\x04meta\x18\x07 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x15\n\rerror_message\x18\x08 \x01(\t*?\n\x0bMediaStatus\x12\x0c\n\x08MEDIA_OK\x10\x00\x12\x0f\n\x0bMEDIA_ERROR\x10\x01\x12\x11\n\rMEDIA_SKIPPED\x10\x02\x32~\n\x05Media\x12;\n\x08PostURLs\x12\x16.main.PostMediaRequest\x1a\x17.main.PostMediaResponse\x12\x38\n\x07GetURLs\x12\x15.main.GetMediaRequest\x1a\x16.main.GetMediaResponseB;Z9github.com/sebasttiano13/AnnieDad/internal/proto/anniedadb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -33,16 +33,24 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'anniegodfather.proto.annied
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z9github.com/sebasttiano13/AnnieDad/internal/proto/anniedad'
-  _globals['_POSTMEDIAREQUEST']._serialized_start=74
-  _globals['_POSTMEDIAREQUEST']._serialized_end=110
-  _globals['_POSTMEDIARESPONSE']._serialized_start=112
-  _globals['_POSTMEDIARESPONSE']._serialized_end=144
-  _globals['_GETMEDIAREQUEST']._serialized_start=146
-  _globals['_GETMEDIAREQUEST']._serialized_end=181
-  _globals['_GETMEDIARESPONSE']._serialized_start=183
-  _globals['_GETMEDIARESPONSE']._serialized_end=214
-  _globals['_GETLISTURLRESPONSE']._serialized_start=216
-  _globals['_GETLISTURLRESPONSE']._serialized_end=249
-  _globals['_MEDIA']._serialized_start=252
-  _globals['_MEDIA']._serialized_end=438
+  _globals['_MEDIASTATUS']._serialized_start=872
+  _globals['_MEDIASTATUS']._serialized_end=935
+  _globals['_POSTMEDIAREQUEST']._serialized_start=75
+  _globals['_POSTMEDIAREQUEST']._serialized_end=138
+  _globals['_POSTMEDIAREQUESTMESSAGE']._serialized_start=140
+  _globals['_POSTMEDIAREQUESTMESSAGE']._serialized_end=261
+  _globals['_POSTMEDIARESPONSE']._serialized_start=263
+  _globals['_POSTMEDIARESPONSE']._serialized_end=328
+  _globals['_POSTMEDIARESPONSEMESSAGE']._serialized_start=331
+  _globals['_POSTMEDIARESPONSEMESSAGE']._serialized_end=492
+  _globals['_GETMEDIAREQUEST']._serialized_start=494
+  _globals['_GETMEDIAREQUEST']._serialized_end=555
+  _globals['_GETMEDIAREQUESTMESSAGE']._serialized_start=557
+  _globals['_GETMEDIAREQUESTMESSAGE']._serialized_end=598
+  _globals['_GETMEDIARESPONSE']._serialized_start=600
+  _globals['_GETMEDIARESPONSE']._serialized_end=663
+  _globals['_GETMEDIARESPONSEMESSAGE']._serialized_start=666
+  _globals['_GETMEDIARESPONSEMESSAGE']._serialized_end=870
+  _globals['_MEDIA']._serialized_start=937
+  _globals['_MEDIA']._serialized_end=1063
 # @@protoc_insertion_point(module_scope)

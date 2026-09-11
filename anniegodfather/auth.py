@@ -72,7 +72,7 @@ class TokenInMemoryStorage:
         self.token_storage = defaultdict(TokenData)
         self.lock = asyncio.Lock()
 
-    async def upsert_tokens(self, user_id: int, access: str = None, refresh: str = None):
+    async def upsert_tokens(self, user_id: str, access: str = None, refresh: str = None):
         async with self.lock:
 
             data = self.token_storage[user_id]
@@ -99,7 +99,6 @@ class TokenInMemoryStorage:
 
 class AuthInterceptor(aio.UnaryUnaryClientInterceptor):
     def __init__(self, server: str, api_key: str):
-        # создаём отдельный канал и stub для AuthService
         self.token_storage = TokenInMemoryStorage()
         self._auth_channel = grpc.aio.insecure_channel(server)
         self._auth_stub = auth_pb2_grpc.AuthServiceStub(self._auth_channel)
@@ -139,7 +138,6 @@ class AuthInterceptor(aio.UnaryUnaryClientInterceptor):
             raise AuthBotLoginError(err)
 
 
-    # === перехват gRPC вызовов ===
     async def intercept_unary_unary(self, continuation, client_call_details, request):
         logger.debug(f"AUTH INTERCEPTOR: serve method {client_call_details.method}")
         if client_call_details.method.decode("utf-8") in self.whitelistmethods:

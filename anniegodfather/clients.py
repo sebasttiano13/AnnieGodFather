@@ -41,14 +41,17 @@ class DadClient:
 
     async def fetch_post_url(self, filename: str, telegram_id: int = None):
         await self.auth_interceptor.set_current_user(telegram_id)
-        request = father_pb2.PostMediaRequest(filename=filename)
-        resp = await self.media_stub.PostURL(request)
-        return resp.url
+        messages = [father_pb2.PostMediaRequestMessage(filename=filename)]
+        request = father_pb2.PostMediaRequest(data=messages)
+        resp = await self.media_stub.PostURLs(request)
+        print(resp[0])
+        return resp[0].upload_url
 
-    async def fetch_get_url(self, filename: str, telegram_id=None) -> Any:
+    async def fetch_get_url(self, file_id: str, telegram_id=None) -> Any:
         """Gets presighned S3 get url from anniedad backend"""
         await self.auth_interceptor.set_current_user(telegram_id)
-        request = father_pb2.GetMediaRequest(filename=filename)
-        resp = await self.media_stub.GetURL(request)
-
-        return resp
+        message = [father_pb2.GetMediaRequestMessage(file_id=file_id)]
+        request = father_pb2.GetMediaRequest(data=message)
+        resp = await self.media_stub.GetURLs(request)
+        print(resp[0])
+        return resp[0].download_url

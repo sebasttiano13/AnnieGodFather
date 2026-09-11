@@ -4,7 +4,6 @@ import grpc
 import warnings
 
 from anniegodfather.proto import anniedad_pb2 as anniegodfather_dot_proto_dot_anniedad__pb2
-from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 GRPC_GENERATED_VERSION = '1.76.0'
 GRPC_VERSION = grpc.__version__
@@ -35,19 +34,14 @@ class MediaStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.PostURL = channel.unary_unary(
-                '/main.Media/PostURL',
+        self.PostURLs = channel.unary_unary(
+                '/main.Media/PostURLs',
                 request_serializer=anniegodfather_dot_proto_dot_anniedad__pb2.PostMediaRequest.SerializeToString,
                 response_deserializer=anniegodfather_dot_proto_dot_anniedad__pb2.PostMediaResponse.FromString,
                 _registered_method=True)
-        self.GetURL = channel.unary_unary(
-                '/main.Media/GetURL',
+        self.GetURLs = channel.unary_unary(
+                '/main.Media/GetURLs',
                 request_serializer=anniegodfather_dot_proto_dot_anniedad__pb2.GetMediaRequest.SerializeToString,
-                response_deserializer=anniegodfather_dot_proto_dot_anniedad__pb2.GetMediaResponse.FromString,
-                _registered_method=True)
-        self.GetListURL = channel.unary_unary(
-                '/main.Media/GetListURL',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=anniegodfather_dot_proto_dot_anniedad__pb2.GetMediaResponse.FromString,
                 _registered_method=True)
 
@@ -55,19 +49,13 @@ class MediaStub(object):
 class MediaServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def PostURL(self, request, context):
+    def PostURLs(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetURL(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetListURL(self, request, context):
+    def GetURLs(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -76,19 +64,14 @@ class MediaServicer(object):
 
 def add_MediaServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'PostURL': grpc.unary_unary_rpc_method_handler(
-                    servicer.PostURL,
+            'PostURLs': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostURLs,
                     request_deserializer=anniegodfather_dot_proto_dot_anniedad__pb2.PostMediaRequest.FromString,
                     response_serializer=anniegodfather_dot_proto_dot_anniedad__pb2.PostMediaResponse.SerializeToString,
             ),
-            'GetURL': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetURL,
+            'GetURLs': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetURLs,
                     request_deserializer=anniegodfather_dot_proto_dot_anniedad__pb2.GetMediaRequest.FromString,
-                    response_serializer=anniegodfather_dot_proto_dot_anniedad__pb2.GetMediaResponse.SerializeToString,
-            ),
-            'GetListURL': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetListURL,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                     response_serializer=anniegodfather_dot_proto_dot_anniedad__pb2.GetMediaResponse.SerializeToString,
             ),
     }
@@ -103,7 +86,7 @@ class Media(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def PostURL(request,
+    def PostURLs(request,
             target,
             options=(),
             channel_credentials=None,
@@ -116,7 +99,7 @@ class Media(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/main.Media/PostURL',
+            '/main.Media/PostURLs',
             anniegodfather_dot_proto_dot_anniedad__pb2.PostMediaRequest.SerializeToString,
             anniegodfather_dot_proto_dot_anniedad__pb2.PostMediaResponse.FromString,
             options,
@@ -130,7 +113,7 @@ class Media(object):
             _registered_method=True)
 
     @staticmethod
-    def GetURL(request,
+    def GetURLs(request,
             target,
             options=(),
             channel_credentials=None,
@@ -143,35 +126,8 @@ class Media(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/main.Media/GetURL',
+            '/main.Media/GetURLs',
             anniegodfather_dot_proto_dot_anniedad__pb2.GetMediaRequest.SerializeToString,
-            anniegodfather_dot_proto_dot_anniedad__pb2.GetMediaResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def GetListURL(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/main.Media/GetListURL',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             anniegodfather_dot_proto_dot_anniedad__pb2.GetMediaResponse.FromString,
             options,
             channel_credentials,
